@@ -6,7 +6,7 @@
 #    By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/21 19:18:37 by ltanenba          #+#    #+#              #
-#    Updated: 2018/05/02 15:02:44 by ltanenba         ###   ########.fr        #
+#    Updated: 2018/05/03 21:58:08 by ltanenba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,13 @@ COM_STRING	= "Compiling:"
 
 LIBFT		= libft/libft.a
 
-LS_SRC		= ft_ls.c
+LS_SRC		= ft_ls.c \
+			  data_handlers.c \
+			  flag_handlers.c \
+			  print_handlers.c \
+			  print_handlers2.c \
+			  sort_handlers.c \
+			  cmp_functions.c
 
 SRC			= $(addprefix src/, $(LS_SRC))
 OBJ			= $(addprefix obj/, $(LS_SRC:.c=.o))
