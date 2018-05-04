@@ -6,7 +6,7 @@
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 19:15:19 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/05/04 16:21:37 by ltanenba         ###   ########.fr       */
+/*   Updated: 2018/05/04 16:30:32 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,5 @@ int				main(int argc, char **argv)
 		ft_strcat(path_buf, "./");
 		ft_ls(".", path_buf);
 	}
-	while (1) {}
 	return (0);
 }
