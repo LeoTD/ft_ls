@@ -6,7 +6,7 @@
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 19:46:48 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/05/03 19:50:06 by ltanenba         ###   ########.fr       */
+/*   Updated: 2018/05/04 16:19:54 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void		st_fillnode(struct stat *statbuf, t_lsfile *tmp)
 	tmp->ctime = statbuf->st_ctime;
 }
 
-t_lsfile	*ls_newnode(struct stat *statbuf, char *name)
+t_lsfile		*ls_newnode(struct stat *statbuf, char *name)
 {
 	t_lsfile		*tmp;
 	struct passwd	*pwd;
@@ -64,10 +64,10 @@ t_lsfile	*ls_newnode(struct stat *statbuf, char *name)
 	{
 		MEM_CHECK(tmp->grp_id = ft_strnew(0));
 	}
-	return (tmp);	
+	return (tmp);
 }
 
-void		ls_addnode(t_list **h, struct stat *statbuf, char *name)
+void			ls_addnode(t_list **h, struct stat *statbuf, char *name)
 {
 	t_list			*tmp;
 	t_list			*res;
@@ -75,6 +75,7 @@ void		ls_addnode(t_list **h, struct stat *statbuf, char *name)
 
 	MEM_CHECK(content = ls_newnode(statbuf, name));
 	MEM_CHECK(res = ft_lstnew(content, sizeof(*content)));
+	free(content);
 	if (*h == 0)
 		*h = res;
 	else if ((*h)->next)
@@ -86,4 +87,17 @@ void		ls_addnode(t_list **h, struct stat *statbuf, char *name)
 	}
 	else
 		(*h)->next = res;
+}
+
+void			ls_clrnode(void *content, size_t csize)
+{
+	t_lsfile		*tmp;
+
+	tmp = NULL;
+	if (csize || !csize)
+		tmp = (t_lsfile *)content;
+	free(tmp->name);
+	free(tmp->usr_id);
+	free(tmp->grp_id);
+	free(tmp);
 }

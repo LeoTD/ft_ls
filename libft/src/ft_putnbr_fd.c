@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_handlers.c                                    :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/03 20:40:51 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/05/04 16:18:38 by ltanenba         ###   ########.fr       */
+/*   Created: 2018/02/19 14:52:03 by ltanenba          #+#    #+#             */
+/*   Updated: 2018/02/23 00:06:03 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "ft_ls.h"
+#include <unistd.h>
 
-static int		st_set_funk_id(void)
+void	ft_putnbr_fd(int n, int fd)
 {
-	int		res;
-
-	res = 0;
-	if (g_flags & MOD_TIME_SORT_FLAG)
-		res |= MOD_TIME_SORT_FLAG;
-	if (g_flags & REVERSE_SORT_FLAG)
-		res |= REVERSE_SORT_FLAG;
-	return (res);
-}
-
-void			ls_dirsort(t_list **files)
-{
-	int		funk_id;
-
-	funk_id = st_set_funk_id();
-	ft_lstsort(files, g_sort_funks[funk_id]);
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n *= -1;
+	}
+	if (n == -2147483648)
+	{
+		ft_putstr_fd("2147483648", fd);
+		return ;
+	}
+	if (n / 10 > 0)
+		ft_putnbr_fd(n / 10, fd);
+	ft_putchar_fd(n % 10 + '0', fd);
 }

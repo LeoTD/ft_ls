@@ -1,34 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_handlers.c                                    :+:      :+:    :+:   */
+/*   clist_lstcadd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/03 20:40:51 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/05/04 16:18:38 by ltanenba         ###   ########.fr       */
+/*   Created: 2018/03/15 04:05:12 by ltanenba          #+#    #+#             */
+/*   Updated: 2018/03/30 21:34:08 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "ft_ls.h"
 
-static int		st_set_funk_id(void)
+void	ft_lstcaddr(t_clist *lst, t_clist *n)
 {
-	int		res;
-
-	res = 0;
-	if (g_flags & MOD_TIME_SORT_FLAG)
-		res |= MOD_TIME_SORT_FLAG;
-	if (g_flags & REVERSE_SORT_FLAG)
-		res |= REVERSE_SORT_FLAG;
-	return (res);
+	n->left = lst;
+	n->right = lst->right;
+	ft_relinklr(n);
 }
 
-void			ls_dirsort(t_list **files)
+void	ft_lstcaddl(t_clist *lst, t_clist *n)
 {
-	int		funk_id;
+	n->left = lst->left;
+	n->right = lst;
+	ft_relinklr(n);
+}
 
-	funk_id = st_set_funk_id();
-	ft_lstsort(files, g_sort_funks[funk_id]);
+void	ft_lstcaddu(t_clist *lst, t_clist *n)
+{
+	n->up = lst->up;
+	n->down = lst;
+	ft_relinkud(n);
+}
+
+void	ft_lstcaddd(t_clist *lst, t_clist *n)
+{
+	n->down = lst->down;
+	n->up = lst;
+	ft_relinkud(n);
 }

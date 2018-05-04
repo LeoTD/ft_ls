@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_handlers.c                                    :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/03 20:40:51 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/05/04 16:18:38 by ltanenba         ###   ########.fr       */
+/*   Created: 2018/02/26 17:28:02 by ltanenba          #+#    #+#             */
+/*   Updated: 2018/02/28 17:16:42 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "ft_ls.h"
 
-static int		st_set_funk_id(void)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	int		res;
+	char	*tmp;
+	int		i;
+	int		n;
+	size_t	dst_len;
+	size_t	src_len;
 
-	res = 0;
-	if (g_flags & MOD_TIME_SORT_FLAG)
-		res |= MOD_TIME_SORT_FLAG;
-	if (g_flags & REVERSE_SORT_FLAG)
-		res |= REVERSE_SORT_FLAG;
-	return (res);
-}
-
-void			ls_dirsort(t_list **files)
-{
-	int		funk_id;
-
-	funk_id = st_set_funk_id();
-	ft_lstsort(files, g_sort_funks[funk_id]);
+	src_len = ft_strlen(src);
+	dst_len = ft_strlen(dst);
+	if (dstsize < dst_len + 1)
+		return (src_len + dstsize);
+	tmp = dst;
+	while (*tmp)
+		tmp++;
+	i = -1;
+	n = dstsize - ft_strlen(dst) - 1;
+	while (++i < n && *src)
+		*(tmp++) = *(src++);
+	*tmp = '\0';
+	return (dst_len + src_len);
 }

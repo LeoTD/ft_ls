@@ -1,34 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_handlers.c                                    :+:      :+:    :+:   */
+/*   ft_lstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/03 20:40:51 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/05/04 16:18:38 by ltanenba         ###   ########.fr       */
+/*   Created: 2018/02/27 15:44:11 by ltanenba          #+#    #+#             */
+/*   Updated: 2018/02/27 16:54:23 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "ft_ls.h"
+#include <stdlib.h>
 
-static int		st_set_funk_id(void)
+/*
+** The recursive version: (Opted for iterative out of concerns for memory usage)
+**
+**	if ((*lst)->next)
+**		ft_lstdel(&(*lst)->next, del);
+**	ft_lstdelone(&(*lst), del);
+*/
+
+void	ft_lstdel(t_list **lst, void (*del)(void *, size_t))
 {
-	int		res;
+	t_list	*tmp;
+	t_list	*prev;
 
-	res = 0;
-	if (g_flags & MOD_TIME_SORT_FLAG)
-		res |= MOD_TIME_SORT_FLAG;
-	if (g_flags & REVERSE_SORT_FLAG)
-		res |= REVERSE_SORT_FLAG;
-	return (res);
-}
-
-void			ls_dirsort(t_list **files)
-{
-	int		funk_id;
-
-	funk_id = st_set_funk_id();
-	ft_lstsort(files, g_sort_funks[funk_id]);
+	if (!lst || !*lst)
+		return ;
+	tmp = *lst;
+	while (tmp)
+	{
+		prev = tmp;
+		tmp = tmp->next;
+		ft_lstdelone(&prev, del);
+	}
+	*lst = 0;
 }

@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_handlers.c                                    :+:      :+:    :+:   */
+/*   ft_copyuntil.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/03 20:40:51 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/05/04 16:18:38 by ltanenba         ###   ########.fr       */
+/*   Created: 2018/03/22 10:53:24 by ltanenba          #+#    #+#             */
+/*   Updated: 2018/03/30 21:35:12 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "ft_ls.h"
 
-static int		st_set_funk_id(void)
+/*
+** Returns the index of the char "c" in string dst.
+*/
+
+int			ft_copyuntil(char **dst, char *src, char c)
 {
-	int		res;
+	int		i;
+	int		k;
 
-	res = 0;
-	if (g_flags & MOD_TIME_SORT_FLAG)
-		res |= MOD_TIME_SORT_FLAG;
-	if (g_flags & REVERSE_SORT_FLAG)
-		res |= REVERSE_SORT_FLAG;
-	return (res);
-}
-
-void			ls_dirsort(t_list **files)
-{
-	int		funk_id;
-
-	funk_id = st_set_funk_id();
-	ft_lstsort(files, g_sort_funks[funk_id]);
+	i = -1;
+	k = 0;
+	while (src[++i])
+		if (src[i] == c)
+			break ;
+	if (!(*dst = ft_strnew(i)))
+		return (0);
+	while (src[k] && k < i)
+	{
+		*(*dst + k) = *(src + k);
+		k++;
+	}
+	return (i);
 }

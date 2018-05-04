@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_handlers.c                                    :+:      :+:    :+:   */
+/*   ft_strjoin_null.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/03 20:40:51 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/05/04 16:18:38 by ltanenba         ###   ########.fr       */
+/*   Created: 2018/02/22 19:06:53 by ltanenba          #+#    #+#             */
+/*   Updated: 2018/02/22 19:10:41 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "ft_ls.h"
 
-static int		st_set_funk_id(void)
+static int	safe_strlen(char const *str)
 {
-	int		res;
-
-	res = 0;
-	if (g_flags & MOD_TIME_SORT_FLAG)
-		res |= MOD_TIME_SORT_FLAG;
-	if (g_flags & REVERSE_SORT_FLAG)
-		res |= REVERSE_SORT_FLAG;
-	return (res);
+	return (!str ? 0 : ft_strlen(str));
 }
 
-void			ls_dirsort(t_list **files)
+char		*ft_strjoin_null(char const *s1, char const *s2)
 {
-	int		funk_id;
+	char	*tmp;
+	int		len;
+	int		i;
 
-	funk_id = st_set_funk_id();
-	ft_lstsort(files, g_sort_funks[funk_id]);
+	i = -1;
+	len = safe_strlen(s1) + safe_strlen(s2);
+	tmp = ft_strnew(len);
+	if (!tmp)
+		return (0);
+	while (*s1)
+		*(tmp + ++i) = *(s1++);
+	return (tmp);
 }

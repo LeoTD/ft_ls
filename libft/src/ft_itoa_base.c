@@ -1,34 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_handlers.c                                    :+:      :+:    :+:   */
+/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/03 20:40:51 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/05/04 16:18:38 by ltanenba         ###   ########.fr       */
+/*   Created: 2018/02/19 15:48:08 by ltanenba          #+#    #+#             */
+/*   Updated: 2018/03/30 00:18:04 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "ft_ls.h"
 
-static int		st_set_funk_id(void)
+char	*ft_itoa_base(int val, int base)
 {
-	int		res;
+	char	cipher[17];
+	char	tmp[33];
+	int		i;
+	long	n;
 
-	res = 0;
-	if (g_flags & MOD_TIME_SORT_FLAG)
-		res |= MOD_TIME_SORT_FLAG;
-	if (g_flags & REVERSE_SORT_FLAG)
-		res |= REVERSE_SORT_FLAG;
-	return (res);
-}
-
-void			ls_dirsort(t_list **files)
-{
-	int		funk_id;
-
-	funk_id = st_set_funk_id();
-	ft_lstsort(files, g_sort_funks[funk_id]);
+	if (val == 0)
+		return (ft_strdup("0"));
+	if (base == 10)
+		return (ft_itoa(val));
+	n = val;
+	if (n < 0)
+		n *= -1;
+	ft_strcpy(cipher, "0123456789ABCDEF");
+	i = -1;
+	while (++i < 33)
+		tmp[i] = '\0';
+	i = -1;
+	while (n > 0 && i < 33)
+	{
+		tmp[++i] = cipher[n % base];
+		n /= base;
+	}
+	return (ft_strrev(tmp));
 }

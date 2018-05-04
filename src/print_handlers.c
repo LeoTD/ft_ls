@@ -6,7 +6,7 @@
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 16:02:43 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/05/03 20:31:21 by ltanenba         ###   ########.fr       */
+/*   Updated: 2018/05/04 16:17:12 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <unistd.h>
 
 static void		st_printperm(t_lsfile *file)
-{	
+{
 	ft_putchar(file->is_dir);
 	ft_putchar(file->rusr);
 	ft_putchar(file->wusr);
@@ -71,10 +71,10 @@ static void		st_printnode(t_lsfile *file)
 		TAB;
 	}
 	ft_putstr(file->name);
-	NEWLINE;	
+	NEWLINE;
 }
 
-void		ls_printdir(t_list *files)
+void			ls_printdir(t_list *files)
 {
 	t_list			*tmp;
 

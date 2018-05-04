@@ -6,7 +6,7 @@
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:12:20 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/05/03 22:03:39 by ltanenba         ###   ########.fr       */
+/*   Updated: 2018/05/04 16:15:23 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef enum				e_lsflags
 
 int							g_flags;
 
-typedef struct 				s_lsfile
+typedef struct				s_lsfile
 {
 	char					*name;
 	long long				bytes;
@@ -69,10 +69,12 @@ typedef struct 				s_lsfile
 	char					*grp_id;
 }							t_lsfile;
 
+void						ft_ls(char *dir, char *path);
 void						ls_addnode(t_list **h, struct stat *s, char *name);
 void						ls_printdir(t_list *files);
 void						parse_flags(int ac, char **av);
 void						ls_dirsort(t_list **files);
+void						ls_clrnode(void *content, size_t csize);
 
 int							cmp_lex_sort(void *a, void *b);
 int							cmp_r_lex_sort(void *a, void *b);

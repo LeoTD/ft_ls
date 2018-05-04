@@ -6,7 +6,7 @@
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 21:43:39 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/05/03 22:10:48 by ltanenba         ###   ########.fr       */
+/*   Updated: 2018/05/04 16:15:59 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** [ 0 ] if 'b'.
 */
 
-t_lscmp		g_sort_funks[16] = 
+t_lscmp		g_sort_funks[16] =
 {
 	&cmp_lex_sort,
 	&cmp_lex_sort,
@@ -47,7 +47,7 @@ int		cmp_lex_sort(void *a, void *b)
 }
 
 int		cmp_r_lex_sort(void *a, void *b)
-{	
+{
 	if (ft_strcmp(((t_lsfile *)a)->name, ((t_lsfile *)b)->name) < 0)
 		return (0);
 	return (1);

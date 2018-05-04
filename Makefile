@@ -6,11 +6,14 @@
 #    By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/21 19:18:37 by ltanenba          #+#    #+#              #
-#    Updated: 2018/05/03 21:58:08 by ltanenba         ###   ########.fr        #
+#    Updated: 2018/05/04 16:07:04 by ltanenba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= ft_ls
+NAME		= ft_ls 
+
+INCLUDES	= libft/includes/libft.h \
+			  includes/ft_ls.h
 
 CC			= gcc
 CFLAGS		= -Wall -Werror -Wextra -I libft/includes -I includes
