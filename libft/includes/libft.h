@@ -6,7 +6,7 @@
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 15:42:33 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/04/24 15:08:29 by ltanenba         ###   ########.fr       */
+/*   Updated: 2018/07/12 20:57:58 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ char				*ft_strjoin_null(char const *s1, char const *s2);
 int					ft_isupper(int c);
 int					ft_islower(int c);
 void				ft_lstsort(t_list **head, int (*cmp)(void *, void *));
+int					ft_numlen(long long n);
 int					ft_numlen_base(long n, int base);
 int					ft_copyuntil(char **dst, char *src, char c);
 

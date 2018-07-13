@@ -6,7 +6,7 @@
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:12:20 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/07/11 19:25:57 by ltanenba         ###   ########.fr       */
+/*   Updated: 2018/07/12 19:45:22 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct				s_lsfile
 
 typedef struct				s_format_vars
 {
-	size_t					links_max_numlen;
+	size_t					links_max_len;
 	size_t					usrid_max_len;
 	size_t					grpid_max_len;
 	size_t					bytes_max_len;
