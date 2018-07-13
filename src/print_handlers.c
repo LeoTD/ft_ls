@@ -6,7 +6,7 @@
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 16:02:43 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/07/13 00:17:08 by ltanenba         ###   ########.fr       */
+/*   Updated: 2018/07/13 00:54:19 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void		st_printbytes(t_format_vars *v, t_lsfile *file)
 	free(tmp);
 }
 
-void		ls_printnode(t_format_vars *v, t_lsfile *file)
+void			ls_printnode(t_format_vars *v, t_lsfile *file)
 {
 	if (g_flags & LONG_FORM_FLAG)
 	{
