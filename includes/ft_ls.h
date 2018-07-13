@@ -6,7 +6,7 @@
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:12:20 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/05/04 16:15:23 by ltanenba         ###   ########.fr       */
+/*   Updated: 2018/07/11 19:25:57 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,14 @@ typedef struct				s_lsfile
 	char					*usr_id;
 	char					*grp_id;
 }							t_lsfile;
+
+typedef struct				s_format_vars
+{
+	size_t					links_max_numlen;
+	size_t					usrid_max_len;
+	size_t					grpid_max_len;
+	size_t					bytes_max_len;
+}							t_format_vars;
 
 void						ft_ls(char *dir, char *path);
 void						ls_addnode(t_list **h, struct stat *s, char *name);
