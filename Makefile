@@ -6,7 +6,7 @@
 #    By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/21 19:18:37 by ltanenba          #+#    #+#              #
-#    Updated: 2018/05/04 16:07:04 by ltanenba         ###   ########.fr        #
+#    Updated: 2018/07/12 21:25:12 by ltanenba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ LS_SRC		= ft_ls.c \
 			  print_handlers.c \
 			  print_handlers2.c \
 			  sort_handlers.c \
-			  cmp_functions.c
+			  cmp_functions.c \
+			  print_v2.c
 
 SRC			= $(addprefix src/, $(LS_SRC))
 OBJ			= $(addprefix obj/, $(LS_SRC:.c=.o))

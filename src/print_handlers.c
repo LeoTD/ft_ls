@@ -6,7 +6,7 @@
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 16:02:43 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/05/04 16:17:12 by ltanenba         ###   ########.fr       */
+/*   Updated: 2018/07/12 23:29:01 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "ft_ls.h"
 #include <time.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 static void		st_printperm(t_lsfile *file)
 {
@@ -27,22 +28,16 @@ static void		st_printperm(t_lsfile *file)
 	ft_putchar(file->roth);
 	ft_putchar(file->woth);
 	ft_putchar(file->xoth);
+	ft_putchar(file->is_link);
 }
 
-static void		st_printlinks(t_lsfile *file)
+static void		st_printlinks(t_format_vars *v, t_lsfile *file)
 {
-	if (file->links > 99)
-		ft_putnbr(file->links);
-	else if (file->links > 9)
-	{
-		ft_putchar(' ');
-		ft_putnbr(file->links);
-	}
-	else
-	{
-		ft_putstr("  ");
-		ft_putnbr(file->links);
-	}
+	char			*tmp;
+
+	tmp = ft_itoa(file->links);
+	ls_print_with_padding(v->links_max_len, 1, tmp);
+	free(tmp);
 }
 
 static void		st_printtimemod(t_lsfile *file)
@@ -53,35 +48,32 @@ static void		st_printtimemod(t_lsfile *file)
 	write(1, (tmp + 4), 12);
 }
 
-static void		st_printnode(t_lsfile *file)
+static void		st_printbytes(t_format_vars *v, t_lsfile *file)
+{
+	char			*tmp;
+
+	tmp = ft_itoa(file->bytes);
+	ls_print_with_padding(v->bytes_max_len, 1, tmp);
+	free(tmp);
+}
+
+void		ls_printnode(t_format_vars *v, t_lsfile *file)
 {
 	if (g_flags & LONG_FORM_FLAG)
 	{
 		st_printperm(file);
-		TAB;
-		st_printlinks(file);
-		TAB;
-		ft_putstr(file->usr_id);
-		TAB;
-		ft_putstr(file->grp_id);
-		TAB;
-		ft_putnbr((int)file->bytes);
-		TAB;
+		SPACE;
+		st_printlinks(v, file);
+		SPACE;
+		ls_print_with_padding(v->usrid_max_len, 0, file->usr_id);
+		SPACE;
+		ls_print_with_padding(v->grpid_max_len, 0, file->grp_id);
+		SPACE;
+		st_printbytes(v, file);
+		SPACE;
 		st_printtimemod(file);
-		TAB;
+		SPACE;
 	}
-	ft_putstr(file->name);
+	printfname(file);
 	NEWLINE;
-}
-
-void			ls_printdir(t_list *files)
-{
-	t_list			*tmp;
-
-	if (!files)
-		return ;
-	tmp = files;
-	st_printnode(tmp->content);
-	while ((tmp = tmp->next))
-		st_printnode(tmp->content);
 }

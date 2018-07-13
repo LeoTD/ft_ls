@@ -6,7 +6,7 @@
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 15:33:26 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/03/30 00:23:09 by ltanenba         ###   ########.fr       */
+/*   Updated: 2018/07/12 22:39:23 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,26 @@
 
 char	*ft_itoa(int n)
 {
-	char	tmp[13];
-	int		i;
-	int		is_neg;
+	int		numlen;
+	long	nc;
+	char	*str;
 
-	i = -1;
-	is_neg = 0;
-	while (++i < 13)
-		tmp[i] = '\0';
-	if (n < 0 && (is_neg = 1))
-		n *= -1;
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	if (n == 0)
-		return (ft_strdup("0"));
-	i = -1;
-	while (n > 0)
+	numlen = ft_numlen(n);
+	nc = (long)n;
+	str = ft_strnew(numlen);
+	if (str == NULL)
+		return (NULL);
+	str[numlen--] = '\0';
+	if (nc < 0)
 	{
-		tmp[++i] = n % 10 + '0';
-		n /= 10;
+		str[0] = '-';
+		nc = -nc;
 	}
-	if (is_neg)
-		tmp[++i] = '-';
-	return (ft_strrev(tmp));
+	str[numlen--] = (nc % 10) + '0';
+	while (nc >= 10)
+	{
+		nc /= 10;
+		str[numlen--] = (nc % 10) + '0';
+	}
+	return (str);
 }

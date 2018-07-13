@@ -6,7 +6,7 @@
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:12:20 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/07/12 19:45:22 by ltanenba         ###   ########.fr       */
+/*   Updated: 2018/07/12 23:21:34 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define MEM_CHECK(x) if (!(x)) exit(1)
 
 # define PF(x) printf(x)
+# define SPACE ft_putchar(' ')
 # define TAB ft_putchar('\t')
 # define NEWLINE ft_putchar('\n')
 
@@ -40,7 +41,8 @@ typedef enum				e_lsflags
 	RECURSIVE_FLAG = 2,
 	MOD_TIME_SORT_FLAG = 4,
 	REVERSE_SORT_FLAG = 8,
-	INCLUDE_DOT_FLAG = 16
+	INCLUDE_DOT_FLAG = 16,
+	COLOR_FLAG = 32
 }							t_lsflags;
 
 int							g_flags;
@@ -80,9 +82,15 @@ typedef struct				s_format_vars
 void						ft_ls(char *dir, char *path);
 void						ls_addnode(t_list **h, struct stat *s, char *name);
 void						ls_printdir(t_list *files);
+void						ls_printnode(t_format_vars *v, t_lsfile *file);
+int							ls_print_with_padding(int max, int left, char *str);
+void						printfname(t_lsfile *f);
 void						parse_flags(int ac, char **av);
 void						ls_dirsort(t_list **files);
 void						ls_clrnode(void *content, size_t csize);
+
+int							prep_format(t_format_vars *v, t_list *f);
+int							print_with_padding(int max, int left, char *str);
 
 int							cmp_lex_sort(void *a, void *b);
 int							cmp_r_lex_sort(void *a, void *b);
