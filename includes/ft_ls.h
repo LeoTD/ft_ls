@@ -6,7 +6,7 @@
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:12:20 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/07/12 23:21:34 by ltanenba         ###   ########.fr       */
+/*   Updated: 2018/07/13 00:35:40 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,10 @@ typedef struct				s_lsfile
 	time_t					ctime;
 	char					*usr_id;
 	char					*grp_id;
+	char					sym_path[1024];
+	char					is_sticky;
+	char					is_setuid;
+	char					is_setgid;
 }							t_lsfile;
 
 typedef struct				s_format_vars

@@ -6,7 +6,7 @@
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 19:46:48 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/05/04 16:19:54 by ltanenba         ###   ########.fr       */
+/*   Updated: 2018/07/13 00:36:07 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,17 @@
 #include <pwd.h>
 #include <time.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 static void		st_fillnode(struct stat *statbuf, t_lsfile *tmp)
 {
+	int				i;
+
 	tmp->bytes = statbuf->st_size;
 	tmp->links = statbuf->st_nlink;
 	tmp->inode = statbuf->st_ino;
 	tmp->is_dir = (S_ISDIR(statbuf->st_mode)) ? 'd' : '-';
+	tmp->is_dir = (S_ISLNK(statbuf->st_mode)) ? 'l' : tmp->is_dir;
 	tmp->rusr = (statbuf->st_mode & S_IRUSR) ? 'r' : '-';
 	tmp->wusr = (statbuf->st_mode & S_IWUSR) ? 'w' : '-';
 	tmp->xusr = (statbuf->st_mode & S_IXUSR) ? 'x' : '-';
@@ -37,6 +41,11 @@ static void		st_fillnode(struct stat *statbuf, t_lsfile *tmp)
 	tmp->atime = statbuf->st_atime;
 	tmp->mtime = statbuf->st_mtime;
 	tmp->ctime = statbuf->st_ctime;
+	i = readlink(tmp->name, tmp->sym_path, 1023);
+	tmp->sym_path[i] = '\0';
+	tmp->is_sticky = (statbuf->st_mode & S_ISVTX) ? 1 : 0;
+	tmp->is_setuid = (statbuf->st_mode & S_ISUID) ? 1 : 0;
+	tmp->is_setgid = (statbuf->st_mode & S_ISGID) ? 1 : 0;
 }
 
 t_lsfile		*ls_newnode(struct stat *statbuf, char *name)

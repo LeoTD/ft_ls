@@ -6,7 +6,7 @@
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 16:02:43 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/07/12 23:29:01 by ltanenba         ###   ########.fr       */
+/*   Updated: 2018/07/13 00:17:08 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void		st_printperm(t_lsfile *file)
 	ft_putchar(file->roth);
 	ft_putchar(file->woth);
 	ft_putchar(file->xoth);
-	ft_putchar(file->is_link);
 }
 
 static void		st_printlinks(t_format_vars *v, t_lsfile *file)
@@ -67,7 +66,9 @@ void		ls_printnode(t_format_vars *v, t_lsfile *file)
 		SPACE;
 		ls_print_with_padding(v->usrid_max_len, 0, file->usr_id);
 		SPACE;
+		SPACE;
 		ls_print_with_padding(v->grpid_max_len, 0, file->grp_id);
+		SPACE;
 		SPACE;
 		st_printbytes(v, file);
 		SPACE;

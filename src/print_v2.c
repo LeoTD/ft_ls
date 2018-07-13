@@ -6,7 +6,7 @@
 /*   By: ltanenba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 19:24:27 by ltanenba          #+#    #+#             */
-/*   Updated: 2018/07/12 23:25:43 by ltanenba         ###   ########.fr       */
+/*   Updated: 2018/07/13 00:48:07 by ltanenba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,21 @@ void			printfname(t_lsfile *f)
 	if (g_flags & COLOR_FLAG)
 	{
 		if (f->is_dir == 'd')
-			ft_putstr("\033[1;96m");
+			ft_putstr("\033[0m\033[1;96m");
 		else if (f->xusr == 'x' || f->xgrp == 'x' || f->xoth == 'x')
-			ft_putstr("\033[51;31m");
+			ft_putstr("\033[0m\033[51;31m");
+		if (f->is_dir == 'l')
+			ft_putstr("\033[0m\033[0;95m");
+		if (f->is_sticky && f->is_dir && f->woth == 'w')
+			ft_putstr("\033[0m\033[42;30m");
 	}
 	ft_putstr(f->name);
 	ft_putstr("\033[0m");
+	if (f->is_dir == 'l')
+	{
+		ft_putstr(" -> ");
+		ft_putstr(f->sym_path);
+	}
 }
 
 int				prep_format(t_format_vars *v, t_list *f)
